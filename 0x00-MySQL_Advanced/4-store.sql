@@ -4,7 +4,7 @@
 DELIMITER $$
 CREATE TRIGGER DECREASE_QTY
 AFTER INSERT ON `orders`
--- FOR EACH ROW
+FOR EACH ROW
 BEGIN
 UPDATE items
 SET quantity = quantity - NEW.number
