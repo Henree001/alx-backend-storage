@@ -26,4 +26,4 @@ if __name__ == "__main__":
         )
         print("{} status check".format(status_check_count))
 
-        print_nginx_logs()
+    print_nginx_logs()
