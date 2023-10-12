@@ -5,6 +5,7 @@ from pymongo import MongoClient
 
 
 def print_nginx_logs():
+    """Prints stats about Nginx request logs."""
     client = MongoClient("mongodb://127.0.0.1:27017")
     db = client.logs
     nginx_collection = db.nginx
