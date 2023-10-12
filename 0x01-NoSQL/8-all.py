@@ -5,4 +5,4 @@
 def list_all(mongo_collection):
     """This function lists all documents in a collection."""
     all_documents = mongo_collection.find()
-    return [all_documents]
+    return list(all_documents)
