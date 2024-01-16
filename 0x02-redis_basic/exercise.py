@@ -3,7 +3,7 @@
 import redis
 from uuid import uuid4
 from functools import wraps
-from typing import Callable
+from typing import Callable, Union
 
 
 def count_calls(method: Callable) -> Callable:
@@ -71,18 +71,20 @@ class Cache:
 
     def __init__(self) -> None:
         """Initialize."""
-        self.__redis = redis.Redis()
-        self.__redis.flushdb()
+        self._redis = redis.Redis()
+        self._redis.flushdb()
 
     @call_history
     @count_calls
-    def store(self, data: bytes | str | int | float) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """Store data in Redis."""
         key = str(uuid4())
         self.__redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Callable) -> bytes | str | int | float:
+    def get(
+        self, key: str, fn: Union[Callable, None] = None
+    ) -> Union[str, bytes, int, float]:
         """Get data from Redis."""
         data = self.__redis.get(key)
         if fn:
