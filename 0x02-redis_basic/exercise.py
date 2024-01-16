@@ -79,14 +79,14 @@ class Cache:
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Store data in Redis."""
         key = str(uuid4())
-        self.__redis.set(key, data)
+        self._redis.set(key, data)
         return key
 
     def get(
         self, key: str, fn: Union[Callable, None] = None
     ) -> Union[str, bytes, int, float]:
         """Get data from Redis."""
-        data = self.__redis.get(key)
+        data = self._redis.get(key)
         if fn:
             return fn(data)
         return data
